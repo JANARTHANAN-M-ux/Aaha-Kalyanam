@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { mockUsers, mockBookings, mockCancellations, mockServices } from '../data/weddingData'; // Added mockServices
+import { mockUsers, mockBookings, mockCancellations } from '../data/weddingData';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -114,7 +115,6 @@ const Admin = () => {
               <TabsTrigger value="users">Users</TabsTrigger>
               <TabsTrigger value="bookings">Bookings</TabsTrigger>
               <TabsTrigger value="cancellations">Cancellations</TabsTrigger>
-              <TabsTrigger value="services">Services</TabsTrigger> {/* Added Services Tab */}
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
@@ -151,7 +151,7 @@ const Admin = () => {
                               <p className="text-sm text-gray-500">{user.email}</p>
                             </div>
                             <div className="text-sm text-gray-500">
-                              Joined On {user.lastLogin}
+                              Joined on {user.lastLogin}
                             </div>
                           </div>
                         </div>
@@ -280,7 +280,7 @@ const Admin = () => {
                           <div>{cancellation.user}</div>
                           <div>{cancellation.service}</div>
                           <div>{cancellation.date}</div>
-                          <div>₹{cancellation.amount}</div>
+                          <div>₹{cancellation.amount.toLocaleString()}</div>
                           <div>{cancellation.reason}</div>
                         </div>
                       ))}
@@ -289,34 +289,14 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-
-            <TabsContent value="services">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Services</CardTitle>
-                  <CardDescription>List of available services for users</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {mockServices.map((service) => (
-                      <div key={service.id} className="border-b pb-4 last:border-0 last:pb-0">
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <p className="font-medium">{service.name}</p>
-                            <p className="text-sm text-gray-500">{service.description}</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="font-semibold text-primary">₹{service.price}</p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
           </Tabs>
         </main>
+
+        <footer className="bg-white py-4 border-t mt-8">
+          <div className="container mx-auto px-4 text-center text-gray-600 text-sm">
+            © {new Date().getFullYear()} AAHA KALYANAM Admin Dashboard. All rights reserved.
+          </div>
+        </footer>
       </div>
     </div>
   );
