@@ -151,7 +151,7 @@ const Admin = () => {
                               <p className="text-sm text-gray-500">{user.email}</p>
                             </div>
                             <div className="text-sm text-gray-500">
-                              Joined on {user.lastLogin}
+                              Joined On {user.lastLogin}
                             </div>
                           </div>
                         </div>
