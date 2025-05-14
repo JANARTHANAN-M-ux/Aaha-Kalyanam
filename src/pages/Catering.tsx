@@ -162,7 +162,7 @@ const Catering = () => {
                         }}
                         className="w-full"
                       >
-                        Show Details
+                        View Details
                       </Button>
                     </div>
                   </div>

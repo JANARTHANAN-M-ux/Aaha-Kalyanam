@@ -160,7 +160,7 @@ const Decors = () => {
                         }}
                         className="w-full"
                       >
-                        Show Details
+                        View Details
                       </Button>
                     </div>
                   </div>

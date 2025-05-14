@@ -174,7 +174,7 @@ const WeddingHalls = () => {
                         }}
                         className="w-full"
                       >
-                        Show Details
+                        View Details
                       </Button>
                     </div>
                   </div>
