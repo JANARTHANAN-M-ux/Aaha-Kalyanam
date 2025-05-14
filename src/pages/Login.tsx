@@ -49,7 +49,7 @@ const Login = () => {
       {/* Login/Signup Form */}
       <div className="relative z-10 w-full max-w-md px-6 py-12 bg-white bg-opacity-95 rounded-lg shadow-xl">
         <div className="text-center mb-8">
-          <p className="mt-2 text-gray-600">Your Perfect Wedding Planning Partner</p>
+          <p className="mt-2 text-gray-600">Your Perfect Wedding Planning </p>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
