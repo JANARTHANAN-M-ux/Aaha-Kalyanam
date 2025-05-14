@@ -100,7 +100,7 @@ const Login = () => {
             />
           </div>
 
-          <Button type="submit" className="w-full bg-primary hover:bg-secondary">
+          <Button type="submit" className="w-full bg-orange-400 hover:bg-orange-300">
             {isLogin ? 'Login' : 'Sign Up'}
           </Button>
         </form>
@@ -109,7 +109,7 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-primary hover:underline"
+            className="text-orange-400 hover:underline"
           >
             {isLogin ? 'Need an account? Sign up' : 'Already have an account? Login'}
           </button>

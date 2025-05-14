@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md py-4 sticky top-0 z-50">
+    <nav className="bg-orange-200 shadow-md py-4 sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
 
         {/* Logo on the Left */}

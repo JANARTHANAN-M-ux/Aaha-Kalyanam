@@ -1,82 +1,104 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
-    <footer className="bg-darkPurple text-white py-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-xl font-playfair font-bold mb-4">
-              <span className="text-primary">AAHA</span> <span className="text-gold">KALYANAM</span>
+    <footer className="bg-gradient-to-br from-orange-200 via-yellow-50 to-orange-50 text-gray-800 py-12 border-t border-orange-200 shadow-inner">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Brand */}
+          <div className="text-center md:text-left">
+            <h3 className="text-2xl font-extrabold font-playfair mb-3 tracking-wide text-orange-800">
+              <span className="text-black">AAHA</span>{' '}
+              <span className="text-orange-700">KALYANAM</span>
             </h3>
-            <p className="text-gray-300 mb-4">
-              Your premier wedding planning service, creating unforgettable moments for your special day.
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Your premier wedding planning service, creating unforgettable moments that last a lifetime.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <Instagram size={24} />
+            <div className="flex justify-center md:justify-start space-x-4 mt-4">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 hover:text-orange-800 transition duration-300"
+              >
+                <Instagram size={22} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <Facebook size={24} />
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 hover:text-orange-800 transition duration-300"
+              >
+                <Facebook size={22} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                <Twitter size={24} />
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-orange-600 hover:text-orange-800 transition duration-300"
+              >
+                <Twitter size={22} />
               </a>
             </div>
           </div>
-          
+
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/wedding-halls" className="text-gray-300 hover:text-white transition-colors">
-                  Wedding Halls
-                </Link>
-              </li>
-              <li>
-                <Link to="/photography" className="text-gray-300 hover:text-white transition-colors">
-                  Photography
-                </Link>
-              </li>
-              <li>
-                <Link to="/decors" className="text-gray-300 hover:text-white transition-colors">
-                  Decors
-                </Link>
-              </li>
-              <li>
-                <Link to="/catering" className="text-gray-300 hover:text-white transition-colors">
-                  Catering
-                </Link>
-              </li>
+          <div className="text-center md:text-center md:ml-6">
+            <h4 className="text-lg font-bold mb-4 text-orange-800 underline decoration-wavy underline-offset-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2 text-gray-700 font-medium">
+              {[
+                { path: "/about", label: "About Us" },
+                { path: "/wedding-halls", label: "Wedding Halls" },
+                { path: "/photography", label: "Photography" },
+                { path: "/decors", label: "Decors" },
+                { path: "/catering", label: "Catering" },
+              ].map((link, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={link.path}
+                    className="hover:text-orange-700 transition duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          
+
           {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>123 Wedding Street, Chennai</li>
-              <li>Tamil Nadu, India - 600001</li>
-              <li>Phone: +91 98765 43210</li>
-              <li>Email: info@aahakalyanam.com</li>
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-bold mb-4 text-orange-800 underline decoration-dotted underline-offset-4">
+              Contact Us
+            </h4>
+            <ul className="space-y-2 text-gray-700">
+              <li className="flex items-center gap-2">
+                📍 123 Wedding Street, Chennai
+              </li>
+              <li className="flex items-center gap-2">
+                📫 Tamil Nadu, India - 600001
+              </li>
+              <li className="flex items-center gap-2">
+                📞 +91 98765 43210
+              </li>
+              <li className="flex items-center gap-2">
+                ✉️ info@aahakalyanam.com
+              </li>
             </ul>
           </div>
         </div>
-        
-        <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-          <p>© {currentYear} AAHA KALYANAM. All rights reserved.</p>
+
+        {/* Copyright */}
+        <div className="border-t border-orange-200 mt-10 pt-6 text-center text-sm text-gray-600">
+          <p>
+            © {currentYear}{' '}
+            <span className="font-semibold text-orange-700">AAHA KALYANAM</span>. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
