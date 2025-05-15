@@ -1,29 +1,102 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { mockUsers, mockBookings, mockCancellations } from '../data/weddingData';
+import { mockUsers, mockBookings, mockCancellations, mockServices } from '../data/weddingData';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { LogOut, Users, Calendar, AlertCircle, BarChart } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { LogOut, Users, Calendar, AlertCircle, BarChart, Plus, Trash2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Admin = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [activeTab, setActiveTab] = useState('overview');
   const [activeUsers, setActiveUsers] = useState(0);
+  const [services, setServices] = useState([]);
+  
+  // Form state for new service
+  const [newService, setNewService] = useState({
+    name: '',
+    description: '',
+    price: '',
+    imageUrl: ''
+  });
 
+  // Load services data
+  useEffect(() => {
+    setServices(mockServices);
+    setActiveUsers(Math.floor(Math.random() * 20) + 5);
+  }, []);
+
+  // Redirect non-admin users
   useEffect(() => {
     if (!user || user.role !== 'admin') {
       navigate('/dashboard');
     }
-    setActiveUsers(Math.floor(Math.random() * 20) + 5);
   }, [user, navigate]);
 
   if (!user || user.role !== 'admin') {
     return null;
   }
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewService(prev => ({
+      ...prev,
+      [name]: name === 'price' ? Number(value) || '' : value
+    }));
+  };
+
+  // Add new service
+  const handleAddService = () => {
+    // Validation
+    if (!newService.name || !newService.description || !newService.price || !newService.imageUrl) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const newServiceWithId = {
+      ...newService,
+      id: Date.now() // Generate a unique ID
+    };
+
+    setServices(prev => [newServiceWithId, ...prev]);
+    
+    // Reset form
+    setNewService({
+      name: '',
+      description: '',
+      price: '',
+      imageUrl: ''
+    });
+    
+    toast({
+      title: "Success",
+      description: `${newServiceWithId.name} has been added to services`,
+    });
+  };
+
+  // Delete service
+  const handleDeleteService = (id) => {
+    const serviceToDelete = services.find(service => service.id === id);
+    
+    setServices(prev => prev.filter(service => service.id !== id));
+    
+    toast({
+      title: "Service Removed",
+      description: `${serviceToDelete.name} has been removed from services`,
+    });
+  };
 
   const todayBookings = mockBookings.filter(booking =>
     new Date(booking.date).toDateString() === new Date().toDateString()
@@ -59,7 +132,7 @@ const Admin = () => {
         </header>
 
         <main className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <div className="space-y-1">
@@ -107,6 +180,22 @@ const Admin = () => {
                 </p>
               </CardContent>
             </Card>
+            
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <div className="space-y-1">
+                  <CardTitle className="text-sm font-medium">Services</CardTitle>
+                  <CardDescription>Available services</CardDescription>
+                </div>
+                <Calendar className="w-6 h-6 text-primary" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{services.length}</div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Click Services tab to manage
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
           <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
@@ -114,6 +203,7 @@ const Admin = () => {
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
               <TabsTrigger value="bookings">Bookings</TabsTrigger>
+              <TabsTrigger value="services">Services</TabsTrigger>
               <TabsTrigger value="cancellations">Cancellations</TabsTrigger>
             </TabsList>
 
@@ -251,6 +341,107 @@ const Admin = () => {
                       </div>
                     ))}
                   </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="services" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Add New Service</CardTitle>
+                  <CardDescription>Create a new service for your customers</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Service Name</label>
+                      <Input 
+                        placeholder="e.g. Wedding Photography" 
+                        name="name"
+                        value={newService.name}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Price (₹)</label>
+                      <Input 
+                        type="number" 
+                        placeholder="e.g. 25000" 
+                        name="price"
+                        value={newService.price}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-4">
+                    <label className="text-sm font-medium">Description</label>
+                    <Textarea 
+                      placeholder="Describe the service..." 
+                      className="resize-none" 
+                      rows={3}
+                      name="description"
+                      value={newService.description}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Image URL</label>
+                    <Input 
+                      placeholder="https://example.com/image.jpg" 
+                      name="imageUrl"
+                      value={newService.imageUrl}
+                      onChange={handleInputChange}
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Provide a URL to an image that represents this service</p>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button onClick={handleAddService} className="flex items-center">
+                    <Plus size={16} className="mr-2" />
+                    Add Service
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Manage Services</CardTitle>
+                  <CardDescription>View, edit, or delete existing services</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {services.length === 0 ? (
+                    <Alert>
+                      <AlertDescription>No services available. Add your first service above.</AlertDescription>
+                    </Alert>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {services.map((service) => (
+                        <Card key={service.id} className="overflow-hidden">
+                          <div className="aspect-video w-full overflow-hidden">
+                            <img 
+                              src={service.imageUrl} 
+                              alt={service.name}
+                              className="w-full h-full object-cover transition-transform hover:scale-105"
+                            />
+                          </div>
+                          <CardContent className="p-4">
+                            <h3 className="font-medium truncate">{service.name}</h3>
+                            <p className="text-sm text-gray-500 line-clamp-2 h-10">{service.description}</p>
+                            <div className="flex items-center justify-between mt-2">
+                              <p className="font-semibold text-primary">₹{service.price.toLocaleString()}</p>
+                              <Button 
+                                variant="destructive" 
+                                size="sm"
+                                onClick={() => handleDeleteService(service.id)}
+                              >
+                                <Trash2 size={16} />
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
