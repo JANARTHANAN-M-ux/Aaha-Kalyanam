@@ -316,108 +316,36 @@ export const sliderImages = [
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzY8_NS1-Hr_kS-3LlOhkaRfWfldzPXI5hi2NPzGLJmnApLCJdXw&s=10&ec=72940544',
 ];
 
-// Mock user data for admin dashboard
 export const mockUsers = [
-  {
-    id: 1,
-    username: "Priya",
-    email: "priya@example.com",
-    phoneNumber: "9876543210",
-    lastLogin: "2024-05-12"
-  },
-  {
-    id: 2,
-    username: "Raj",
-    email: "raj@example.com",
-    phoneNumber: "8765432109",
-    lastLogin: "2024-05-13"
-  },
-  {
-    id: 3,
-    username: "Sneha",
-    email: "sneha@example.com",
-    phoneNumber: "7654321098",
-    lastLogin: "2024-05-14"
-  },
-  {
-    id: 4,
-    username: "Vikram",
-    email: "vikram@example.com",
-    phoneNumber: "6543210987",
-    lastLogin: "2024-05-12"
-  },
-  {
-    id: 5,
-    username: "Meera",
-    email: "meera@example.com",
-    phoneNumber: "5432109876",
-    lastLogin: "2024-05-13"
-  }
+  { id: 1, username: "john_doe", email: "john@example.com", phoneNumber: "+91 9876543210", lastLogin: "2023-05-15" },
+  { id: 2, username: "jane_smith", email: "jane@example.com", phoneNumber: "+91 9876543211", lastLogin: "2023-05-14" },
+  { id: 3, username: "raj_kumar", email: "raj@example.com", phoneNumber: "+91 9876543212", lastLogin: "2023-05-13" },
+  { id: 4, username: "priya_sharma", email: "priya@example.com", phoneNumber: "+91 9876543213", lastLogin: "2023-05-12" },
+  { id: 5, username: "arun_singh", email: "arun@example.com", phoneNumber: "+91 9876543214", lastLogin: "2023-05-11" },
 ];
 
-// Mock bookings for admin dashboard
 export const mockBookings = [
-  {
-    id: 1,
-    user: "Priya",
-    service: "Royal Palace Wedding Hall",
-    date: "2024-06-15",
-    amount: 150000,
-    status: "Confirmed"
-  },
-  {
-    id: 2,
-    user: "Raj",
-    service: "Premium Wedding Photography Package",
-    date: "2024-05-28",
-    amount: 75000,
-    status: "Confirmed"
-  },
-  {
-    id: 3,
-    user: "Sneha",
-    service: "Royal Elegance Decor Package",
-    date: "2024-07-10",
-    amount: 85000,
-    status: "Pending"
-  },
-  {
-    id: 4,
-    user: "Vikram",
-    service: "Royal Feast Catering",
-    date: "2024-06-22",
-    amount: 1200,
-    status: "Confirmed"
-  },
-  {
-    id: 5,
-    user: "Meera",
-    service: "Golden Gardens Wedding Hall",
-    date: "2024-06-20",
-    amount: 120000,
-    status: "Cancelled"
-  }
+  { id: 1, user: "john_doe", service: "Wedding Photography", date: "2023-06-15", amount: 25000, status: "Confirmed" },
+  { id: 2, user: "jane_smith", service: "Reception Decoration", date: "2023-07-20", amount: 35000, status: "Pending" },
+  { id: 3, user: "raj_kumar", service: "Catering Services", date: "2023-08-05", amount: 50000, status: "Confirmed" },
+  { id: 4, user: "priya_sharma", service: "Bridal Makeup", date: "2023-06-25", amount: 15000, status: "Cancelled" },
+  { id: 5, user: "arun_singh", service: "Wedding Venue", date: "2023-09-10", amount: 100000, status: "Confirmed" },
 ];
 
-// Mock cancellations for admin dashboard
 export const mockCancellations = [
-  {
-    id: 1,
-    user: "Meera",
-    service: "Golden Gardens Wedding Hall",
-    date: "2024-06-20",
-    amount: 120000,
-    reason: "Venue availability changed"
-  },
-  {
-    id: 2,
-    user: "Karthik",
-    service: "Traditional South Indian Catering",
-    date: "2024-05-28",
-    amount: 800,
-    reason: "Budget constraints"
-  }
+  { id: 1, user: "priya_sharma", service: "Bridal Makeup", date: "2023-06-25", amount: 15000, reason: "Vendor unavailable" },
+  { id: 2, user: "arun_singh", service: "DJ Services", date: "2023-07-05", amount: 20000, reason: "Changed plans" },
+  { id: 3, user: "john_doe", service: "Video Editing", date: "2023-08-15", amount: 10000, reason: "Budget constraints" },
 ];
+
+export const mockServices = [
+  { id: 1, name: "Wedding Photography", description: "Professional photography service for your special day", price: 25000, imageUrl: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" },
+  { id: 2, name: "Reception Decoration", description: "Elegant decoration for wedding reception", price: 35000, imageUrl: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop" },
+  { id: 3, name: "Catering Services", description: "Delicious multi-cuisine food for your guests", price: 50000, imageUrl: "https://images.unsplash.com/photo-1467546706352-fa0391181b7c?q=80&w=2012&auto=format&fit=crop" },
+  { id: 4, name: "Bridal Makeup", description: "Professional makeup service for the bride", price: 15000, imageUrl: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?q=80&w=1974&auto=format&fit=crop" },
+  { id: 5, name: "Wedding Venue", description: "Beautiful venues for wedding ceremonies", price: 100000, imageUrl: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop" },
+];
+
 
 // About us content
 export const aboutContent = {
